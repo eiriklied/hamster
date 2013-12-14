@@ -10,9 +10,7 @@ require "hamster/hash"
 require "hamster/set"
 
 module Hamster
-
   class << self
-
     extend Forwardable
 
     # Create a list containing the given items
@@ -562,7 +560,6 @@ module Hamster
   # The recommended interface for using this is through {Hamster.stream Hamster.stream}
   #
   class Stream
-
     extend Forwardable
 
     include List
@@ -597,7 +594,6 @@ module Hamster
       end
       list
     end
-
   end
 
   # A list without any elements
@@ -605,9 +601,7 @@ module Hamster
   # This is a singleton, since all empty lists are equivalent. It is used
   # as a terminating element in a chain of +Sequence+ instances.
   module EmptyList
-
     class << self
-
       include List
 
       def head
@@ -621,9 +615,6 @@ module Hamster
       def empty?
         true
       end
-
     end
-
   end
-
 end
