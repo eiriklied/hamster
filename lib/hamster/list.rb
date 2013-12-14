@@ -538,7 +538,6 @@ module Hamster
   # The last +Sequence+ instance in the chain has the {EmptyList} as its tail.
   #
   class Sequence
-
     include List
 
     attr_reader :head, :tail
@@ -551,7 +550,6 @@ module Hamster
     def empty?
       false
     end
-
   end
 
   # Lazy list stream
