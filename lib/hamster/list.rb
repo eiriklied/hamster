@@ -125,7 +125,6 @@ module Hamster
       return EmptyList if from == to
       Stream.new { Sequence.new(from, interval_exclusive(from.next, to)) }
     end
-
   end
 
   # Common behavior for lists
@@ -144,7 +143,6 @@ module Hamster
   # {EmptyList} as a terminator.
   module List
     extend Forwardable
-
     include Enumerable
 
     CADR = /^c([ad]+)r$/
@@ -170,7 +168,7 @@ module Hamster
     def each
       return self unless block_given?
       list = self
-      while !list.empty?
+      until list.empty?
         yield(list.head)
         list = list.tail
       end
@@ -207,9 +205,7 @@ module Hamster
       return self unless block_given?
       Stream.new do
         list = self
-        while !list.empty? && yield(list.head)
-          list = list.tail
-        end
+        list = list.tail while !list.empty? && yield(list.head)
         list
       end
     end
@@ -332,9 +328,7 @@ module Hamster
 
     def last
       list = self
-      while !list.tail.empty?
-        list = list.tail
-      end
+      list = list.tail until list.tail.empty?
       list.head
     end
 
@@ -520,7 +514,6 @@ module Hamster
         end
       end
     end
-
   end
 
   # The basic building block for constructing lists
@@ -589,9 +582,7 @@ module Hamster
 
     def target
       list = vivify
-      while list.is_a?(Stream)
-        list = list.vivify
-      end
+      list = list.vivify while list.is_a?(Stream)
       list
     end
   end
